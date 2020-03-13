@@ -1,0 +1,120 @@
+﻿@model IEnumerable<MvcMovie.Models.Flights>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+@section Scripts{
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#indexTable').DataTable();
+        });
+    </script>
+}
+<h1 class="display-3 text-center">Flights List</h1>
+
+<p style="text-align:center;">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a style="display:normal" class="btn btn-outline-primary" role="button" asp-action="Create">Create New</a>
+        <!--<button type="button" onclick="location.href='@Url.Action("Create", "Flights")'" />-->
+    }
+
+</p>
+<div class="table-responsive">
+    <table id="indexTable" class="table table-hover">
+        <thead class="text-center">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.LocationFrom)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LocationTo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DepartTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ArrivalTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PlaneType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PilotName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PlaneCapacityNormal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PlaneCapacityBusiness)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AlreadyReserved)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LocationFrom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LocationTo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DepartTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ArrivalTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlaneType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PilotName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlaneCapacityNormal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlaneCapacityBusiness)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AlreadyReserved)
+                    </td>
+                    <td>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (User.IsInRole("Admin") || User.IsInRole("Worker"))
+                            {
+                                <div class="btn-group dropright">
+                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.PlaneId">Edit</a>
+                                        <a class="dropdown-item" asp-action="Details" asp-route-id="@item.PlaneId">Details</a>
+                                        <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.PlaneId">Delete</a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="btn-group dropright">
+                                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" asp-action="Details" asp-route-id="@item.PlaneId">Details</a>
+                                </div>
+                            </div>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

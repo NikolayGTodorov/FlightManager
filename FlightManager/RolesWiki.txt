@@ -1,0 +1,24 @@
+Разрешаване на контролери или класове да бъдат използвани от анонимни потребители
+[AllowAnonymous]
+
+Разрешаване на контролер или клас да бъдат използвани от администратор или работник
+[Authorize(Roles = "Admin,Worker")]
+Само администратор
+[Authorize(Roles = "Admin")]
+Само работник
+[Authorize(Roles = "Worker")]
+
+Показване на HTML елемент за потребител който само е влязъл(няма роля)
+@if (User.Identity.IsAuthenticated)
+{
+    //HTML
+}
+
+Показване на HTML елемент за потребител който има роля
+@if (User.Identity.IsAuthenticated)
+{
+          if (User.IsInRole("Admin") || User.IsInRole("Worker"))
+             {
+		//HTML 
+             }
+}

@@ -1,0 +1,75 @@
+﻿@model MvcMovie.Models.Flights
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+    <h1 class="display-3 text-center">Edit flight №@Html.DisplayFor(model => model.PlaneId)</h1>
+
+
+<hr />
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PlaneId" />
+            <div class="form-group">
+                <label asp-for="LocationFrom" class="control-label"></label>
+                <input asp-for="LocationFrom" class="form-control" />
+                <span asp-validation-for="LocationFrom" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LocationTo" class="control-label"></label>
+                <input asp-for="LocationTo" class="form-control" />
+                <span asp-validation-for="LocationTo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DepartTime" type="datetime-local" class="control-label"></label>
+                <input asp-for="DepartTime" type="datetime-local" class="form-control" />
+                <span asp-validation-for="DepartTime" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ArrivalTime" type="datetime-local" class="control-label"></label>
+                <input asp-for="ArrivalTime" type="datetime-local" class="form-control" />
+                <span asp-validation-for="ArrivalTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlaneType" class="control-label"></label>
+                <input asp-for="PlaneType" class="form-control" />
+                <span asp-validation-for="PlaneType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PilotName" class="control-label"></label>
+                <input asp-for="PilotName" class="form-control" />
+                <span asp-validation-for="PilotName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlaneCapacityNormal" class="control-label"></label>
+                <input asp-for="PlaneCapacityNormal" class="form-control" />
+                <span asp-validation-for="PlaneCapacityNormal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlaneCapacityBusiness" class="control-label"></label>
+                <input asp-for="PlaneCapacityBusiness" class="form-control" />
+                <span asp-validation-for="PlaneCapacityBusiness" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AlreadyReserved" class="control-label"></label>
+                <input asp-for="AlreadyReserved" class="form-control" />
+                <span asp-validation-for="AlreadyReserved" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" style="float:right" value="Save" class="btn btn-primary" />
+                <a style="display:normal;" class="btn btn-outline-primary" role="button" asp-action="Index">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
